@@ -1,21 +1,42 @@
-import React, { useState } from 'react'
-import { createContext } from 'react'
-import usePersistedState from '@hoeks/use-persisted-state';
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 
-const NAME_KEY = 'name'
+const NAME_KEY = 'momentum-clonish-name'
 
-export const NameCtx = createContext(NAME_KEY)
+export const NameCtx = createContext({
+  name: '',
+  saveName: () => {},
+})
 
-function Name() {
-    const [name, setName] = usePersistedState(NAME_KEY);
+function Name({ children }) {
+  const [name, setName] = useState('')
 
-    const saveName = (newName) => {
-        setName(newName)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const stored = window.localStorage.getItem(NAME_KEY)
+    if (stored) {
+      setName(stored)
     }
+  }, [])
 
-  return (
-    <NameCtx.Provider value={{ name, saveName }}>{children}</NameCtx.Provider>
+  const saveName = (newName) => {
+    const normalizedName = newName.trim()
+    setName(normalizedName)
+
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(NAME_KEY, normalizedName)
+    }
+  }
+
+  const value = useMemo(
+    () => ({
+      name,
+      saveName,
+    }),
+    [name]
   )
+
+  return <NameCtx.Provider value={value}>{children}</NameCtx.Provider>
 }
 
 export default Name

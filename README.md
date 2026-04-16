@@ -20,8 +20,8 @@ I'm committed to online privacy and anonymity, and this app will:
   - [x] Disable Vercel analytics (no `vitals` request)
 - [x] Custom scrollbar
 - [x] Source code link
-- [ ] Zen mode
-- [ ] Light mode
+- [x] Zen mode
+- [x] Light mode
 - [x] Clock
   - [x] Basic clock
   - [x] Custom timezone
@@ -34,15 +34,15 @@ I'm committed to online privacy and anonymity, and this app will:
   - [x] Add task
   - [x] Save tasks to local storage
   - [x] Delete task
-  - [ ] Edit tasks
-  - [ ] Move task
-  - [ ] Autofocus top task
+  - [x] Edit tasks
+  - [x] Move task
+  - [x] Autofocus top task
 - [x] Weather
   - [x] Current weather with icon
-  - [ ] Weather forecast on hover
+  - [x] Weather forecast on hover
 - [x] Search bar
   - [x] Search with Yandex
-  - [ ] Select search /engine
+  - [x] Select search /engine
 - [ ] Website Shortcuts
   - [ ] Add shortcut
   - [ ] Save shortcuts to local storage

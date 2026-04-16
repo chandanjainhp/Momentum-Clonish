@@ -1,13 +1,304 @@
 .main {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 1.25rem;
+
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 1.25rem;
     overflow: hidden;
-  
+
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+}
+
+.main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(12, 16, 22, 0.6) 0%,
+        rgba(12, 16, 22, 0.3) 45%,
+        rgba(12, 16, 22, 0.75) 100%
+    );
+    z-index: 0;
+}
+
+.lightMode::before {
+    background: linear-gradient(
+        160deg,
+        rgba(245, 249, 252, 0.76) 0%,
+        rgba(236, 242, 247, 0.56) 45%,
+        rgba(226, 234, 242, 0.78) 100%
+    );
+}
+
+.topBar,
+.centerPanel,
+.tasksPanel {
+    position: relative;
+    z-index: 1;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.topRight {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sourceLink {
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(10, 10, 12, 0.35);
+    color: #f4f4f4;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    backdrop-filter: blur(5px);
+}
+
+.weatherCard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(10, 10, 12, 0.35);
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px);
+}
+
+.weatherIcon {
+    font-size: 1rem;
+}
+
+.forecastTooltip {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    display: none;
+    min-width: 180px;
+    padding: 0.65rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(8, 8, 10, 0.8);
+    backdrop-filter: blur(8px);
+}
+
+.weatherCard:hover .forecastTooltip {
+    display: block;
+}
+
+.forecastItem {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.83rem;
+}
+
+.forecastItem + .forecastItem {
+    margin-top: 0.4rem;
+}
+
+.toggleButton,
+.buttonPrimary,
+.iconButton,
+.linkButton {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(10, 10, 12, 0.35);
+    color: #ffffff;
+    border-radius: 0.65rem;
+    padding: 0.5rem 0.75rem;
+    backdrop-filter: blur(5px);
+}
+
+.buttonPrimary:hover,
+.iconButton:hover,
+.toggleButton:hover,
+.linkButton:hover,
+.sourceLink:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.centerPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.75rem;
+}
+
+.dateLabel {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.time {
+    font-size: clamp(2.5rem, 8vw, 7rem);
+    font-weight: 500;
+}
+
+.greeting {
+    font-size: clamp(1.1rem, 2.5vw, 2rem);
+    font-weight: 400;
+}
+
+.focusWrap {
+    width: min(90vw, 620px);
+}
+
+.focusLabel {
+    margin-bottom: 0.4rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.inlineForm,
+.searchForm {
+    width: min(90vw, 620px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.searchForm {
+    margin-top: 0.45rem;
+}
+
+.timezoneWrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.input,
+.select {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(10, 10, 12, 0.33);
+    color: #ffffff;
+    border-radius: 0.65rem;
+    padding: 0.6rem 0.75rem;
+    backdrop-filter: blur(5px);
+}
+
+.input:focus,
+.select:focus {
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.tasksPanel {
+    width: min(95vw, 850px);
+    margin: 0 auto;
+    padding: 0.85rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(10, 10, 12, 0.35);
+    backdrop-filter: blur(8px);
+}
+
+.tasksHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.taskList {
+    margin-top: 0.7rem;
+    max-height: 30vh;
+    overflow: auto;
+}
+
+.taskItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 0.4rem 0;
+}
+
+.taskItem + .taskItem {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.taskText {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.taskControls {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.lightMode {
+    color: #162236;
+}
+
+.lightMode .sourceLink,
+.lightMode .weatherCard,
+.lightMode .toggleButton,
+.lightMode .buttonPrimary,
+.lightMode .iconButton,
+.lightMode .linkButton,
+.lightMode .input,
+.lightMode .select,
+.lightMode .tasksPanel {
+    color: #162236;
+    border-color: rgba(7, 24, 50, 0.3);
+    background: rgba(255, 255, 255, 0.36);
+}
+
+.lightMode .forecastTooltip {
+    color: #162236;
+    border-color: rgba(7, 24, 50, 0.25);
+    background: rgba(245, 249, 252, 0.94);
+}
+
+@media (max-width: 800px) {
+    .topBar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .topRight {
+        flex-wrap: wrap;
+    }
+
+    .searchForm,
+    .inlineForm {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tasksPanel {
+        width: 100%;
+    }
+
+    .taskItem {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
